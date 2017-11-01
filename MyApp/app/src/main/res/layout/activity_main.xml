@@ -2,7 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
     android:layout_height="match_parent">
-    <include layout="@layout/include_toolbar_layout"/>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <!--<include layout="@layout/include_toolbar_layout"/>-->
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:onClick="onClick"/>-->
+    <!--<com.view.ToDaysDialog-->
+        <!--android:id="@+id/dialog"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="200dp" />-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:background="#eee"/>-->
+    <!--<com.view.MyBottomView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="56dp"/>-->
+
 
 </LinearLayout>
