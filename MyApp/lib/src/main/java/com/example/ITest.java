@@ -5,5 +5,12 @@ package com.example;
  */
 
 public interface ITest {
-      void getValue();
+      String  getValue();
+
+      ITest iii=new ITest() {
+            @Override
+            public String getValue() {
+                  return null;
+            }
+      };
 }

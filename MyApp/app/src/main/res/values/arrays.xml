@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="home_icon" translatable="false">
+        <item>@drawable/home_icon_selector</item>
+        <item>@drawable/home_icon_selector</item>
+        <item>@drawable/home_icon_selector</item>
+        <item>@drawable/ic_launcher_round</item>
+    </string-array>
+    <string-array name="home_text" translatable="false">
+        <item>dsdasd1</item>
+        <item>2dqwdqw</item>
+        <item>3sqwsdqwds</item>
+        <item>dasdsa4</item>
+    </string-array>
+
+</resources>
