@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.view.toast.ToastAnimationView
+        android:id="@+id/toast1"
+        android:background="#f60"
+        android:layout_width="match_parent"
+        android:text="21ewqeqweqwdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddddddddddsadddddddddffffffffffgggggggggggggswadffdsaffd"
+        android:textColor="#000"
+        android:layout_height="25dp" />
+
+</LinearLayout>

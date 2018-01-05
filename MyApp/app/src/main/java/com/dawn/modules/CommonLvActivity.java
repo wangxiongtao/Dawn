@@ -106,6 +106,8 @@ public class CommonLvActivity extends BaseActivity {
         lv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter1=new RvAdapter(list);
+        rv.setHasFixedSize(true);
+        rv.setNestedScrollingEnabled(false);
         rv.setAdapter(adapter1);
 
 

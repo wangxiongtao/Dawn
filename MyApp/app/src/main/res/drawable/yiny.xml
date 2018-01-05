@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"> <!-- 阴影部分 最下面一层 -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:endColor="#88eeeeee"
+                android:startColor="#88eeeaaa" />
+        </shape>
+    </item> <!-- 背景部分 --> <!-- 形象的表达：bottom left ... 类似于设置 margin -->
+    <item android:top="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#fff" />
+        </shape>
+    </item>
+
+</layer-list>

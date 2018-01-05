@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dawn.modules.TiKuActivity">
+    <Chronometer
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/timer"/>
+
+    <!--<cn.iwgang.countdownview.CountdownView-->
+        <!--android:id="@+id/countdown"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:isHideTimeBackground="true"-->
+        <!--app:isShowHour="true"-->
+        <!--app:isShowMinute="true"-->
+        <!--app:isShowSecond="true"-->
+        <!--app:timeTextColor="#000000"-->
+        <!--app:timeTextSize="22sp"-->
+        <!--app:isTimeTextBold="true"-->
+        <!--app:suffixGravity="bottom"-->
+        <!--app:suffixTextColor="#000000"-->
+        <!--app:suffixTextSize="12sp"-->
+        <!--app:suffixHour="时"-->
+        <!--app:suffixMinute="分"-->
+        <!--app:suffixSecond="秒"/>-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tiku_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

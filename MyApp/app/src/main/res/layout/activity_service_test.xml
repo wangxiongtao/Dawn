@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dawn.modules.ServiceTestActivity">
+    <TextView
+        android:id="@+id/open_start_service"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f60"
+        android:text="开启startService"/>
+    <TextView
+        android:id="@+id/close_start_service"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="#f60"
+        android:text="关闭startService"/>
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/open_bind_service"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f60"
+        android:text="开启bindService"/>
+    <TextView
+        android:id="@+id/close_unbind_service"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="#f60"
+        android:text="解绑bindService"/>
+
+</LinearLayout>

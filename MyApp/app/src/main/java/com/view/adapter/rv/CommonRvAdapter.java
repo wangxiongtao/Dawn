@@ -21,7 +21,7 @@ public abstract class CommonRvAdapter<T> extends RecyclerView.Adapter<CommonRvVi
 
     @Override
     public CommonRvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(getItemLayoutId(), null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(getItemLayoutId(), parent,false);
 //        View v=View.inflate(parent.getContext(),getItemLayoutId(),null);
         return new CommonRvViewHolder(v);
     }

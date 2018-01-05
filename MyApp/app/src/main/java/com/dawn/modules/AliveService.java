@@ -2,6 +2,7 @@ package com.dawn.modules;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 import com.util.ToastUtil;
@@ -25,7 +26,14 @@ public class AliveService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        ToastUtil.showShort(this,"啊 我被bind了");
+        return new MyBinder();
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        ToastUtil.showShort(this,"啊 我被onUnbind了");
+        return super.onUnbind(intent);
     }
 
     @Override
@@ -33,9 +41,9 @@ public class AliveService extends Service {
 
 //        AlertDialog.Builder b=new AlertDialog.Builder(this);
 //        b.setMessage("我是对话框").show();
-        ToastUtil.showShort(this,"wdewqrwqerweqrfewrfew");
-        Intent intent1=new Intent(this,MVPActivity.class);
-        startActivity(intent1);
+        ToastUtil.showShort(this,"startid"+startId);
+//        Intent intent1=new Intent(this,MVPActivity.class);
+//        startActivity(intent1);
 
 
 //        startForeground(1001, new Notification());
@@ -66,5 +74,17 @@ public class AliveService extends Service {
 //        }).start();
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        ToastUtil.showShort(this,"啊 我被onDestroy了");
+    }
+    public class MyBinder extends Binder {
+
+        public AliveService getService(){
+            return AliveService.this;
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -18,17 +19,19 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.dawn.R;
 import com.dawn.base.BaseActivity;
 import com.dawn.domain.mananger.BroadcastManager;
 import com.dawn.http.request.MyRequest;
+import com.dawn.modules.Fingerprint.MyIntentService;
 import com.dawn.test.MyHandler;
 import com.util.LogUtil;
 import com.util.StatusBarUtils;
 import com.util.ToastUtil;
 import com.view.BottomTabView;
+import com.view.NewToast;
+import com.view.SDCardUtil;
 import com.view.ToDaysDialog;
 
 import java.lang.ref.WeakReference;
@@ -70,6 +73,8 @@ public class MainActivity extends BaseActivity implements Observer {
     private ListView lv;
     private RadioButton radioButton;
     private BottomTabView bottomView;
+    private FingerprintManager fingerprintManager;
+    private int a=0;
     private MyHandler handler=new MyHandler(){
         @Override
         public void handlerMessage() {
@@ -79,6 +84,7 @@ public class MainActivity extends BaseActivity implements Observer {
         }
     };
     EditText editText;
+    private NewToast toast;
 
 
     @Override
@@ -121,13 +127,37 @@ public class MainActivity extends BaseActivity implements Observer {
 
         ColorStateList colorStateList = new ColorStateList(states, colors);
         radioButton.setTextColor(colorStateList);
-        LogUtil.i("==getPackageResourcePath=================>"+getPackageResourcePath());
+        LogUtil.i("==SDCARD  SIZE=================>"+ SDCardUtil.getMaxSDSpace(this));
+        LogUtil.i("==SDCARD  A SIZE=================>"+ SDCardUtil.getAvailableSdSpace(this));
+        LogUtil.i("==PHONE  SIZE=================>"+ SDCardUtil.getMaxRomSpace(this));
+        LogUtil.i("==PHONE  A SIZE=================>"+ SDCardUtil.getAvailableRomSpace(this));
         LogUtil.i("==getPackageCodePath=================>"+getPackageCodePath());
         StatusBarUtils.transparencyBar(this);
         StatusBarUtils.statusBarDarkMode(this);
 
         Messenger messenger=new Messenger(new Handler());
         Message message=new Message();
+         toast=new NewToast();
+//        fingerprintManager=getSystemService(FingerprintManager.class);
+//        FingerUtil.init();
+//        Window window=getWindow();
+//        TextView tv=new TextView(this);
+//        tv.setText("saddasdas");
+//        tv.setTextColor(Color.parseColor("#ff6600"));
+//        window.setContentView(tv,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,200));
+//        WindowManager m=getWindowManager();
+//        TextView tv2=new TextView(this);
+//        tv2.setText("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+//        tv2.setTextColor(Color.parseColor("#ff6600"));
+//        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
+//                WindowManager.LayoutParams.WRAP_CONTENT,
+//                WindowManager.LayoutParams.WRAP_CONTENT,
+//                0, 0,
+//                PixelFormat.TRANSPARENT
+//        );
+//        layoutParams.type=WindowManager.LayoutParams.TYPE_TOAST;
+//        m.addView(tv2,layoutParams);
+
 
 
 
@@ -141,6 +171,47 @@ public class MainActivity extends BaseActivity implements Observer {
         Log.i("aaa","=======getRootDirectory============>fun"+ Environment.getRootDirectory());
         Log.i("aaa","=======getExternalStorageDirectory============>fun"+ Environment.getExternalStorageDirectory());
         Log.i("aaa","=======getExternalFilesDir============>fun"+getExternalFilesDir("test/b/c/qwe"));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        MyFingerPrintManager.getInstance().startListening(this);
+//        fingerprintManager.authenticate(new FingerprintManager.CryptoObject(FingerUtil.defaultCipher),new CancellationSignal(), 0,new FingerprintManager.AuthenticationCallback()
+//        {
+//            @Override
+//            public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
+//                super.onAuthenticationSucceeded(result);
+//                ToastUtil.showShort(MainActivity.this,"指纹成功");
+//            }
+//
+//            @Override
+//            public void onAuthenticationError(int errorCode, CharSequence errString) {
+//                super.onAuthenticationError(errorCode, errString);
+//                ToastUtil.showShort(MainActivity.this,"指纹错误--"+errString);
+//            }
+//
+//            @Override
+//            public void onAuthenticationFailed() {
+//                super.onAuthenticationFailed();
+//                ToastUtil.showShort(MainActivity.this,"指纹失败--");
+//            }
+//        },null);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -180,7 +251,11 @@ public class MainActivity extends BaseActivity implements Observer {
         bottomView.setOnTabItemSelectListener(new BottomTabView.OnTabItemSelectListener() {
             @Override
             public void onTabItemSelect(RadioButton button, int postion) {
-                Toast.makeText(button.getContext(),button.getText().toString()+postion,0).show();
+//                Toast.makeText(button.getContext(),button.getText().toString()+postion,0).show();
+//                ToastUtil.myToast(getApplicationContext());
+
+                toast.init(getApplicationContext(),R.style.CouponDialogAnimation);
+
             }
 
             @Override
@@ -199,13 +274,15 @@ public class MainActivity extends BaseActivity implements Observer {
 
                 case 0:
 //                    intent.setClass(parent.getContext(),HttpActivity.class);
-                    new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        handler.sendMessage();
-                    }
-                }).start();
-                    handler.loop();
+//                    new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        handler.sendMessage();
+//                    }
+//                }).start();
+//                    handler.loop();
+                    Intent i=new Intent(view.getContext(), MyIntentService.class);
+                    startService(i);
 //
                     break;
                 case 1:
@@ -235,8 +312,50 @@ public class MainActivity extends BaseActivity implements Observer {
 
 //                    startService(new Intent(parent.getContext(),AliveService.class));
                     break;
+                case 6:
+                    intent.setClass(parent.getContext(),ServiceTestActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 7:
+                    intent.setClass(parent.getContext(),QRCodeActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 8:
+                    intent.setClass(parent.getContext(),MyViewActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 9:
+                    intent.setClass(parent.getContext(),WebViewActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 10:
+                    intent.setClass(parent.getContext(),TreeListActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 11:
+                    intent.setClass(parent.getContext(),TiKuActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 12:
+                    intent.setClass(parent.getContext(),ViewPagerActivity.class);
+                    ToastUtil.showShort(MainActivity.this,"hint"+(a++));
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
             }
-//            startActivityForResult(intent,0);
+            startActivityForResult(intent,0);
         });
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -276,6 +395,13 @@ public class MainActivity extends BaseActivity implements Observer {
         adapter.add("事件分发");
         adapter.add("自定义日历");
         adapter.add("listview");
+        adapter.add("service");
+        adapter.add("Zxing");
+        adapter.add("自定义View");
+        adapter.add("webview");
+        adapter.add("多级列表");
+        adapter.add("题库");
+        adapter.add("viewpager");
         lv.setAdapter(adapter);
 
 
@@ -306,5 +432,11 @@ public class MainActivity extends BaseActivity implements Observer {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         LogUtil.e("=======onKeyDown========>");
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        ToastUtil.showShort(this,"width========="+lv.getWidth()+"");
     }
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dawn.modules.MyViewActivity">
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="r98qwey09qewurpokqfaskfpojsadiofhkjdnklzpkwa[dk['sakfoaskfkaskf"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+
+
+
+
+    <com.view.MyLayout2
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="r98qwey09qewurpokqfaskfpojsadiofhkjdnklzpkwa[dk['sakfoaskfkaskf"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="3333333"
+            android:layout_height="wrap_content" />
+
+    </com.view.MyLayout2>
+
+
+
+
+
+
+
+    <com.view.tiku.SingleChoiceLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+    <com.view.toast.ToastAnimationView
+        android:visibility="gone"
+        android:id="@+id/toast"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f60"
+        android:text="22222222222222"/>
+
+
+
+    <com.view.MyView
+        android:layout_width="80dp"
+        android:layout_height="10dp"
+        android:background="#f60"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="100dp"
+            android:background="#f00" />
+
+        <ScrollView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:fillViewport="true"
+            android:layout_height="match_parent">
+
+            <com.view.MyViewGroup
+                android:id="@+id/viewgroup"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+
+            </com.view.MyViewGroup>
+        </ScrollView>
+
+
+    </LinearLayout>
+</LinearLayout>

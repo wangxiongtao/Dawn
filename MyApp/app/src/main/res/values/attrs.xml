@@ -8,4 +8,75 @@
         <attr name="tab_textUnSelectColor" format="color"/>
     </declare-styleable>
 
+
+
+
+
+
+
+
+    <!--corner_color 边角颜色，
+       scanner_color 扫描线颜色
+       possible_result_color 扫描点颜色
+       frame_color 扫描框边线颜色
+       mask_color 模糊区域颜色
+       label_text  框上方提示
+   -->
+    <declare-styleable name="ViewfinderView">
+        <attr name="corner_color" format="color"/>
+        <attr name="laser_color" format="color"/>
+        <attr name="frame_color" format="color" />
+        <attr name="mask_color" format="color" />
+        <attr name="result_point_color" format="color"/>
+        <attr name="result_color" format="color" />
+        <attr name="label_text_color" format="color"/>
+        <attr name="label_text" format="string"/>
+        <attr name="label_text_size" format="float"/>
+    </declare-styleable>
+
+
+
+
+    <declare-styleable name="SlidingUpLayout">
+        <attr name="dragger" format="reference|color" />
+        <attr name="draggerWidth" format="dimension" />
+        <attr name="draggerHeight" format="dimension" />
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension" />
+        <attr name="gravity" format="enum">
+            <enum name="top" value="0x30" />
+            <enum name="bottom" value="0x50" />
+            <enum name="left" value="0x03" />
+            <enum name="right" value="0x05" />
+            <enum name="center_vertical" value="0x10" />
+            <enum name="fill_vertical" value="0x70" />
+            <enum name="center_horizontal" value="0x01" />
+            <enum name="fill_horizontal" value="0x07" />
+            <enum name="center" value="0x11" />
+            <enum name="fill" value="0x77" />
+            <enum name="clip_vertical" value="0x80" />
+            <enum name="clip_horizontal" value="0x08" />
+            <enum name="start" value="0x00800003" />
+            <enum name="end" value="0x00800005" />
+        </attr>
+    </declare-styleable>
+
+
+
+
+
+
+
+
+
+
+    <declare-styleable name="SlidingUpLayout.Layout">
+        <attr name="layout_weight" format="float" />
+        <attr name="layout_gravity" format="enum">
+            <enum name="left" value="0x03" />
+            <enum name="right" value="0x05" />
+            <enum name="center_horizontal" value="0x01" />
+        </attr>
+    </declare-styleable>
+
 </resources>
