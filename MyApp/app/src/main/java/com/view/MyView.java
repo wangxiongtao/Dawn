@@ -1,7 +1,9 @@
 package com.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -29,17 +31,35 @@ public class MyView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
+        if(changed){
+//            layout(0,99,getMeasuredWidth(),getMeasuredHeight()+99);
+        }
+
+
+
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        if (widthMode == MeasureSpec.EXACTLY) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        } else {
-            setMeasuredDimension(800, 100);
-        }
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+//        if (widthMode == MeasureSpec.EXACTLY) {
+//            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        } else {
+            setMeasuredDimension(99, 99);
+//        }
     }
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Paint paint=new Paint();
+        paint.setStrokeWidth(10);
+        Rect rect=new Rect(100,100,getMeasuredWidth(),getMeasuredHeight());
+        canvas.drawLine(0,0,getMeasuredWidth(),getMeasuredHeight(),paint);
+
+
+    }
 }

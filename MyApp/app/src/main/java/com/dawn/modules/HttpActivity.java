@@ -9,13 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dawn.R;
 import com.dawn.base.BaseActivity;
-import com.dawn.http.request.LoginRequest;
-import com.http_service.HttpRequest;
-import com.http_service.RequestType;
 import com.http_service.download.DownLoadRequest;
 import com.util.LogUtil;
 
@@ -69,11 +65,11 @@ public class HttpActivity extends BaseActivity {
         };
 
 
-        LoginRequest request=new LoginRequest(10);
-        request.mobilePhone="17600801534";
-        request.vCode="8888";
-        request.doRequest(this);
-        request.doRequest(HttpRequest.POST,this);
+//        LoginRequest request=new LoginRequest(10);
+//        request.mobilePhone="17600801534";
+//        request.vCode="8888";
+//        request.doRequest(this);
+//        request.doRequest(HttpRequest.POST,this);
 
         ActivityCompat.requestPermissions(HttpActivity.this, new String[]{android
                 .Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -125,38 +121,6 @@ public class HttpActivity extends BaseActivity {
 //        request1.doRequest(this);
     }
 
-    @Override
-    public void onHttpStart(int tag) {
-        super.onHttpStart(tag);
-        textView.setText("请求开始");
-    }
-
-    @Override
-    public void onHttpSuccess(String response, int tag) {
-        super.onHttpSuccess(response, tag);
-        Toast.makeText(this,response,0).show();
-        textView.setText(response);
-
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-
-    }
-
-    @Override
-    public void onProgress(long total, long current) {
-        super.onProgress(total, current);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textView.setText("进度"+(new Float(current)/total)*100);
-            }
-        });
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -177,7 +141,7 @@ public class HttpActivity extends BaseActivity {
 //                            LogUtil.i("======创建====>" + file.mkdirs());
 //
 //                        }
-                        request.doRequest(2,this);
+//                        request.doRequest(2,this);
                     }
                     break;
                 }

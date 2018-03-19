@@ -68,7 +68,7 @@ class C extends B{
 
 
 
-public class MainActivity extends BaseActivity implements Observer {
+public  class MainActivity extends BaseActivity implements Observer {
     ToDaysDialog daysDialog;
     private ListView lv;
     private RadioButton radioButton;
@@ -291,8 +291,8 @@ public class MainActivity extends BaseActivity implements Observer {
                     break;
                 case 2:
                     Log.i("aaa","=======setOnItemClickListener==1====>");
-//                    intent.setClass(parent.getContext(),MVPActivity.class);
-                    startService(new Intent(parent.getContext(),AliveService.class));
+                    intent.setClass(parent.getContext(),MVPActivity.class);
+//                    startService(new Intent(parent.getContext(),AliveService.class));
                     break;
                 case 3:
                     Log.i("aaa","=======setOnItemClickListener==1====>");
@@ -354,6 +354,36 @@ public class MainActivity extends BaseActivity implements Observer {
 
 //                    startService(new Intent(parent.getContext(),AliveService.class));
                     break;
+                case 13:
+                    intent.setClass(parent.getContext(),PullToRefreshActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 14:
+                    intent.setClass(parent.getContext(),ShowErrorActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 15:
+                    intent.setClass(parent.getContext(),MyViewActivity2.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 16:
+                    intent.setClass(parent.getContext(),MyView3Activity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 17:
+                    intent.setClass(parent.getContext(),MyView4Activity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
             }
             startActivityForResult(intent,0);
         });
@@ -402,6 +432,11 @@ public class MainActivity extends BaseActivity implements Observer {
         adapter.add("多级列表");
         adapter.add("题库");
         adapter.add("viewpager");
+        adapter.add("pull-to-refresh");
+        adapter.add("showError");
+        adapter.add("自定义View2");
+        adapter.add("自定义View3");
+        adapter.add("自定义View4");
         lv.setAdapter(adapter);
 
 

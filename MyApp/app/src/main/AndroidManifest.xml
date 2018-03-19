@@ -111,7 +111,15 @@
             android:exported="false" />
 
         <activity android:name=".modules.TiKuActivity" />
-        <activity android:name=".modules.ViewPagerActivity"></activity>
+        <activity android:name=".modules.ViewPagerActivity" />
+        <activity
+            android:name=".modules.PullToRefreshActivity"
+            android:label="@string/title_activity_pull_to_refresh"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".modules.ShowErrorActivity" />
+        <activity android:name=".modules.MyViewActivity2" />
+        <activity android:name=".modules.MyView3Activity" />
+        <activity android:name=".modules.MyView4Activity"></activity>
     </application>
 
 </manifest>

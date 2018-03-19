@@ -4,37 +4,43 @@
     android:layout_width="match_parent"
     android:background="@android:color/white"
     android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_round"/>
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_below="@+id/img"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/include_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
+        app:contentInsetStart="0dp"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp">
-
-        <TextView
-            android:id="@+id/include_toolbar_title_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
-            android:textColor="#333"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/include_toolbar_title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#333"
+                android:singleLine="true"
+                android:text="22222222222222"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/include_toolbar_right_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:padding="15dp"
-            android:textColor="#333"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/include_toolbar_right_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="#333"
+                android:textSize="18sp"
+                android:text="222222222222222222"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
+
 
     </android.support.v7.widget.Toolbar>
 

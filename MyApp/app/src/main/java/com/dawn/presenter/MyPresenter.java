@@ -1,19 +1,33 @@
 package com.dawn.presenter;
 
-import android.os.Message;
-
-import com.dawn.base.IPresenter;
-import com.util.LogUtil;
+import com.dawn.http.request.LoginRequest;
+import com.dawn.mvp.IView;
 
 /**
  * Created by Administrator on 2017/11/7.
  */
 
-public class MyPresenter implements IPresenter {
-    public void fun(Message msg){
-        LogUtil.i("=====MyPresenter=====>");
-        msg.obj="success";
-        msg.what=56;
-        msg.getTarget().sendMessage(msg);
+public class MyPresenter extends BasePresenter {
+    public MyPresenter(IView view) {
+        super(view);
+    }
+
+    public void getData(){
+      new MyModel().request(new LoginRequest(1)).doRequest(this);
+
+
+
+        getView().handlerView(0,1);
+
+    }
+
+    @Override
+    public void onHttpSuccess(String response, int tag) {
+
+    }
+
+    @Override
+    public void onProgress(long total, long current) {
+
     }
 }

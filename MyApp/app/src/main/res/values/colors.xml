@@ -21,4 +21,5 @@
     <color name="result_point_color">#C0FFFF00</color>
     <color name="laser_color">#0F0</color>
     <color name="corner_color">#00FF00</color>
+    <color name="grey_dd">#a7a7a7</color>
 </resources>

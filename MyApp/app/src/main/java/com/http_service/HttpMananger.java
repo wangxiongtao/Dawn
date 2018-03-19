@@ -28,61 +28,64 @@ import okhttp3.Response;
  */
 
 public class HttpMananger extends AbstractHttp {
-    private static  HttpMananger httpMananger;
+    private static HttpMananger httpMananger;
     private HttpRequest request;
     private String url;
     boolean b;
 
     private OkHttpClient okHttpClient;
     private Handler handler;
-    private HttpMananger(String url){
-        this.url=url;
-        okHttpClient=getOkHttpClient();
-        handler=new Handler();
+
+    private HttpMananger(String url) {
+        this.url = url;
+        okHttpClient = getOkHttpClient();
+        handler = new Handler();
     }
-    public static HttpMananger getInstance(String url){
-        if(httpMananger==null){
-            httpMananger=new HttpMananger(url);
+
+    public static HttpMananger getInstance(String url) {
+        if (httpMananger == null) {
+            httpMananger = new HttpMananger(url);
         }
         return httpMananger;
     }
+
     @Override
-    public void doPostRequest(HttpRequest request,HttpCallBack callBack) {
-        Log.e("aaa","===执行开始======>"+request+"=="+request.getTag()+"----------"+request.getParamMap());
+    public void doPostRequest(HttpRequest request, HttpCallBack callBack) {
+        Log.e("aaa", "===执行开始======>" + request + "==" + request.getTag() + "----------" + request.getParamMap());
         callBack.onHttpStart(10);
-        try{
-            FormBody.Builder builder=new FormBody.Builder();
-            HashMap<String,String> map=request.getParamMap();
-            for (Map.Entry<String,String> entry :map.entrySet()){
-                builder.add(entry.getKey(),entry.getValue());
+        try {
+            FormBody.Builder builder = new FormBody.Builder();
+            HashMap<String, String> map = request.getParamMap();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                builder.add(entry.getKey(), entry.getValue());
             }
-            FormBody body=builder.build();
-            Request myRequest=new Request.Builder().url(url).post(body).tag(request.getTag()).build();
-            Call call=okHttpClient.newCall(myRequest);
+            FormBody body = builder.build();
+            Request myRequest = new Request.Builder().url(url).post(body).tag(request.getTag()).build();
+            Call call = okHttpClient.newCall(myRequest);
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    LogUtil.e("===onFailure=========>"+e.getMessage());
+                    LogUtil.e("===onFailure=========>" + e.getMessage());
 
                 }
 
                 @Override
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    String str=response.body().string();
-                    int tag= (int) call.request().tag();
-                    LogUtil.e("===onResponse=========>"+str);
-                    LogUtil.e("===onResponse===tag======>"+tag);
+                    String str = response.body().string();
+                    int tag = (int) call.request().tag();
+                    LogUtil.e("===onResponse=========>" + str);
+                    LogUtil.e("===onResponse===tag======>" + tag);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            callBack.onHttpSuccess(str,10);
+                            callBack.onHttpSuccess(str, 10);
                         }
                     });
 
 
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -94,16 +97,16 @@ public class HttpMananger extends AbstractHttp {
 
     @Override
     public void doDownLoadFile(DownLoadRequest request, HttpCallBack callBack) {
-        File parenFile=new File(request.desFilePath);
-        if(!parenFile.exists()){
+        File parenFile = new File(request.desFilePath);
+        if (!parenFile.exists()) {
             parenFile.mkdirs();
         }
         final File file = new File(parenFile, request.fileName);
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
         }
         Request myRequest = new Request.Builder().url(url).build();
-        Call call=okHttpClient.newCall(myRequest);
+        Call call = okHttpClient.newCall(myRequest);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -154,13 +157,14 @@ public class HttpMananger extends AbstractHttp {
     public boolean isCorrect(int code) {
         return true;
     }
-    private class MyRun implements Runnable{
-        private Long l1,l2;
+
+    private class MyRun implements Runnable {
+        private Long l1, l2;
         private HttpCallBack callBack;
 
         @Override
         public void run() {
-            callBack.onProgress(l1,l2);
+            callBack.onProgress(l1, l2);
         }
     }
 }

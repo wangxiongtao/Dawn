@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    tools:context="com.dawn.modules.ViewPagerActivity">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/myvp"
-        android:layout_width="300dp"
-        android:layout_height="400dp"/>
+    tools:context="com.dawn.modules.MyView4Activity">
+    <com.view.MyArcView
+        android:id="@+id/arc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

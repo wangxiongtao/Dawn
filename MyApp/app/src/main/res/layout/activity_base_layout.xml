@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_below="@+id/include_toolbar_rl"
+            android:id="@+id/base_content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:visibility="visible" >
+
+        <include layout="@layout/include_empty_viewstub_layout" />
+        </FrameLayout>
+
+
+
+    <include layout="@layout/include_toolbar_layout" />
+
+
+</RelativeLayout>

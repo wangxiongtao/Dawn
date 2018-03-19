@@ -1,6 +1,10 @@
 package com.dawn.base;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,7 +22,9 @@ import android.widget.TextView;
 
 import com.dawn.R;
 import com.dawn.modules.LoginActivity;
-import com.http_service.HttpCallBack;
+import com.dawn.mvp.IView;
+import com.dawn.presenter.BasePresenter;
+import com.r0adkll.slidr.Slidr;
 
 
 /**
@@ -28,11 +34,11 @@ import com.http_service.HttpCallBack;
  * 状态栏沉浸颜色的初始化
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements HttpCallBack,Handler.Callback,IView {
+public abstract class BaseActivity extends AppCompatActivity  implements Handler.Callback ,IView{
     protected final  int STATE_NO_NETWORK=1;
     protected final  int STATE_NO_ERROR=2;
     protected final  int STATE_NO_DATA=3;
-    private View mRootLayout;
+    private ViewGroup mRootLayout;
     protected TextView mToolbar_Title_Txt;
     protected TextView mToolbar_Right_Txt;
     protected View mToolbar_line_Txt;
@@ -45,11 +51,13 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
     private OnBackLoginActivityListener listener;
     private boolean isLogin;
     protected Handler mvpHandler;
+    protected BasePresenter presenter;
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
         Log.i("aaa","=========onPostCreate==============>");
+        attachToActivity(this);
     }
 
     @Override
@@ -67,22 +75,48 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
 //            lp2.topMargin=160;
 //            addContentView(mRootLayout,lp2);
             setContentView(getLayoutId());
+            mRootLayout=findViewById(android.R.id.content);
             if (!setStatusBarColor()) {
 //                StatusBarUtils.setStatusBarColor(this, R.color.white);
 //                StatusBarUtils.statusBarDarkMode(this);
             }
             initToolbar();
             initView(savedInstanceState);
+            createPresenter();
             setListener();
             initData();
             View v=View.inflate(this,R.layout.include_empty_viewstub_layout,null);
             lp=new  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            lp.topMargin= (int) getResources().getDimension(android.R.dimen.app_icon_size)+10;
             addContentView(v,lp);
-             mStub = (ViewStub) findViewById(R.id.viewstub_layout);
+             mStub = (ViewStub) v. findViewById(R.id.viewstub_layout);
+
+
+
+
+            Slidr.attach(this);
+
+            attachToActivity(this);
+
+
+
+
 
 
 //            stub.inflate();
         }
+    }
+    public void attachToActivity(Activity activity) {
+
+        TypedArray a = activity.getTheme().obtainStyledAttributes(new int[]{
+                android.R.attr.windowBackground
+        });
+        int background = a.getResourceId(0, 0);
+        a.recycle();
+
+        ViewGroup decor = (ViewGroup) activity.getWindow().getDecorView();
+        ViewGroup decorChild = (ViewGroup) decor.getChildAt(0);
+        decorChild.setBackgroundColor(Color.WHITE);
     }
 
     private void initToolbar() {
@@ -122,6 +156,14 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
 
     protected abstract void initData();//获取数据等逻辑操作
 
+    protected void createPresenter(){
+        presenter=initPresenter();
+    }
+    protected BasePresenter initPresenter(){
+       return null;
+
+    };
+
     /**
      * 如果需要自定义状态栏颜色 则重写此方法 并且返回值必须true(true：代表自己消费此方法)
      * @return 是否是自己自定义状态栏颜色
@@ -154,7 +196,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
                 }
                 mStub.setVisibility(View.VISIBLE);
                 mEmptyTxt.setText("no data");
-                mRootLayout.setVisibility(View.GONE);
+                mRootLayout.addView(mStub);
                 break;
 
             case STATE_NO_NETWORK:
@@ -192,24 +234,12 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
     }
 
     @Override
-    public void onHttpStart(int tag) {
-
+    public void showLoading() {
+        ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setTitle("数据加载中...");
+        dialog.show();
     }
 
-    @Override
-    public void onHttpSuccess(String response, int tag) {
-
-    }
-
-    @Override
-    public void onHttpFail(int tag) {
-
-    }
-
-    @Override
-    public void onProgress(long total, long current) {
-
-    }
     public interface OnBackLoginActivityListener{
         void onBackLoginActivity();
     }
@@ -221,5 +251,23 @@ public abstract class BaseActivity extends AppCompatActivity implements HttpCall
     }
     protected void handlePMessage(Message msg){
 
+    }
+//    protected void handleView(int what, Object data){
+//
+//    }
+
+
+    @Override
+    public void handlerView(int what, Object data) {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(presenter!=null){
+            presenter.onDestory();
+            presenter=null;
+        }
     }
 }

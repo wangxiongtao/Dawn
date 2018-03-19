@@ -14,7 +14,6 @@
         <TextView
             android:layout_width="match_parent"
             android:text="2222222222wqewqeqw"
-
             android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/ed"

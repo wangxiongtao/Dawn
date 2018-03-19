@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.view.MyGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="com.dawn.modules.MyView3Activity">
+    <!--<TextView-->
+
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="33dp"-->
+        <!--android:background="#0ff"/>-->
+    <com.view.MyView
+        android:layout_width="match_parent"
+        android:background="#f00"
+        android:layout_height="wrap_content" />
+
+    <!--<TextView-->
+
+        <!--android:layout_width="33dp"-->
+        <!--android:layout_height="33dp"-->
+        <!--android:background="#f0f"/>-->
+
+
+
+</com.view.MyGroup>

@@ -3,6 +3,4 @@
     android:id="@+id/viewstub_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip"
     android:layout="@layout/include_empty_layout" />
