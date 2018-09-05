@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="62dp"
+        android:layout_height="32dp"
+        android:layout_margin="50dp">
+
+
+        <RelativeLayout
+            android:id="@+id/sign_btn_layout"
+            android:layout_width="55dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/nosign_bg"
+            android:clipToPadding="false">
+
+            <TextView
+                android:id="@+id/sign_btn_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@drawable/sign"
+                android:drawablePadding="3dp"
+                android:gravity="center"
+                android:text="签到"
+                android:textColor="#998860"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/sign_start_iv0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/start" />
+
+        <ImageView
+            android:id="@+id/sign_start_iv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="1dp"
+            android:src="@drawable/start" />
+
+        <ImageView
+            android:id="@+id/sign_start_iv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/start" />
+
+        <ImageView
+            android:id="@+id/sign_start_iv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/start" />
+
+        <ImageView
+            android:id="@+id/sign_start_iv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/start"
+            />
+
+
+    </RelativeLayout>
+</RelativeLayout>

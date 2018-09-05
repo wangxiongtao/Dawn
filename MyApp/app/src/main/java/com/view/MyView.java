@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.util.LogUtil;
+
 /**
  * Created by Administrator on 2017/12/5.
  */
@@ -48,7 +50,8 @@ public class MyView extends View {
 //        if (widthMode == MeasureSpec.EXACTLY) {
 //            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 //        } else {
-            setMeasuredDimension(99, 99);
+
+        LogUtil.i("=getPaddingLeft()==============>"+getPaddingLeft());
 //        }
     }
 

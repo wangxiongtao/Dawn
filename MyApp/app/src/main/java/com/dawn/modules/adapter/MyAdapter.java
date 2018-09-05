@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MyAdapter extends BaseAdapter {
     private List<MyDate>list;
-    private int selecPos=-1;
+    private int selectPos =-1;
 
     public MyAdapter(List<MyDate> list) {
         this.list = list;
@@ -51,12 +51,20 @@ public class MyAdapter extends BaseAdapter {
         }else {
             mHolder= (ViewHolder) convertView.getTag();
         }
-        mHolder.tvDate.setText(list.get(position).day);
-        if(selecPos==position){
-            mHolder.tvDate.setBackgroundColor(Color.parseColor("#ff6600"));
+        MyDate date=list.get(position);
+        mHolder.tvDate.setText(date.day);
+
+        if(date.isNowDay){
+            mHolder.tvDate.setBackgroundColor(Color.parseColor("#00ff00"));
         }else {
-            mHolder.tvDate.setBackgroundColor(Color.parseColor("#fefefe"));
+            if(selectPos ==position){
+                mHolder.tvDate.setBackgroundColor(Color.parseColor("#ff6600"));
+            }else {
+                mHolder.tvDate.setBackgroundColor(Color.parseColor("#fefefe"));
+            }
         }
+
+
 
 
 //        LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams) mHolder.tvDate.getLayoutParams();
@@ -70,7 +78,11 @@ public class MyAdapter extends BaseAdapter {
         TextView tvDate;
     }
 
-    public void setSelecPos(int selecPos) {
-        this.selecPos = selecPos;
+    public void setSelectPos(int selectPos) {
+        this.selectPos = selectPos;
+    }
+
+    public void setSelectOrUnselectDrawableRes(int selectDrawableId,int unSelectDrawableId){
+
     }
 }

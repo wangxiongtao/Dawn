@@ -25,6 +25,7 @@ import com.dawn.modules.LoginActivity;
 import com.dawn.mvp.IView;
 import com.dawn.presenter.BasePresenter;
 import com.r0adkll.slidr.Slidr;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -269,5 +270,16 @@ public abstract class BaseActivity extends AppCompatActivity  implements Handler
             presenter.onDestory();
             presenter=null;
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this); // 基础指标统计，不能遗漏
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this); // 基础指标统计，不能遗漏
     }
 }

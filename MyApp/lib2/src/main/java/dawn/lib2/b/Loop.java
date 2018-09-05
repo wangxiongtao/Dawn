@@ -9,4 +9,9 @@ public class Loop implements IMyLoop {
     public String intercept(ILoop chain) {
         return chain.proceed();
     }
+
+    @Override
+    public Object fun(Object o) {
+        return null;
+    }
 }

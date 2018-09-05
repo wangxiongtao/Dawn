@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88000000"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改变EditText的文字大小android代码中设置EditText的hint字体大小而不改" />
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -9,5 +9,9 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="widget_margins">18sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="r">50dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_7">7dp</dimen>
 
 </resources>

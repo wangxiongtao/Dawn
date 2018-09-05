@@ -24,6 +24,11 @@ public class MyLoop implements IMyLoop.ILoop {
                     }
                 });
             }
+
+            @Override
+            public Object fun(Object o) {
+                return null;
+            }
         };
 
         return iMyLoop.intercept(this);

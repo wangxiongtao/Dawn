@@ -1,9 +1,13 @@
 package com.dawn.modules;
 
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -11,30 +15,53 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.PersistableBundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.dawn.MyApp;
 import com.dawn.R;
 import com.dawn.base.BaseActivity;
 import com.dawn.domain.mananger.BroadcastManager;
 import com.dawn.http.request.MyRequest;
 import com.dawn.modules.Fingerprint.MyIntentService;
+import com.dawn.modules.alarm.AlarmManagerActivity;
+import com.dawn.modules.fragmenttest.TestActivity;
+import com.dawn.modules.notkillservice.NotKillActivity;
+import com.dawn.modules.workmanager.WorkManagerActivity;
 import com.dawn.test.MyHandler;
+import com.util.Argb8888Transform;
+import com.util.ImageUtil;
 import com.util.LogUtil;
 import com.util.StatusBarUtils;
 import com.util.ToastUtil;
+import com.view.AutoSplitTextView;
 import com.view.BottomTabView;
+import com.view.ImagePicker.ImagePickerActivity;
+import com.view.NameTextView;
 import com.view.NewToast;
 import com.view.SDCardUtil;
+import com.view.TextFlickerView;
 import com.view.ToDaysDialog;
+import com.view.ToImageActivity;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -46,19 +73,19 @@ import java.util.Observer;
 
 class B{
     public void fun(){
-        System.out.println("==fun b=============>");
+        System.out.println("==animationEnd b=============>");
     };
     private void fun2(){
-        System.out.println("==fun b=============>");
+        System.out.println("==animationEnd b=============>");
     };
     protected void fun3(){
-        System.out.println("==fun b=============>");
+        System.out.println("==animationEnd b=============>");
     };
 }
 class C extends B{
     @Override
     public void fun() {
-        System.out.println("==fun c============>");
+        System.out.println("==animationEnd c===MyApp.i=========>"+ MyApp.i++);
     }
     public void fun1() {
         System.out.println("==fun1 c============>");
@@ -70,6 +97,7 @@ class C extends B{
 
 public  class MainActivity extends BaseActivity implements Observer {
     ToDaysDialog daysDialog;
+    ProgressDialog dialog;
     private ListView lv;
     private RadioButton radioButton;
     private BottomTabView bottomView;
@@ -85,6 +113,13 @@ public  class MainActivity extends BaseActivity implements Observer {
     };
     EditText editText;
     private NewToast toast;
+    private ImageView imageView;
+    private ImageView imageView2;
+    private String imgurl="http://img.quanshishequ.com/group1/M00/00/A1/Cns0v1rVnN6AZw6XAABXHovNhaw264.jpg";
+    TextFlickerView textFlickerView;
+    private TextView tvAddr;
+    private NameTextView tvAddr2;
+    private AutoSplitTextView tvAddr3;
 
 
     @Override
@@ -104,16 +139,25 @@ public  class MainActivity extends BaseActivity implements Observer {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        LogUtil.i("==MainActivity==taskId===>"+getTaskId());
         B b=new C();
         b.fun();
+        dialog=new ProgressDialog(this,R.style.common_dialog);
+        dialog.show();
 //        mToolbar_Title_Txt.setText("测试");
         lv= (ListView) findViewById(R.id.lv);
         radioButton=  findViewById(R.id.rbtn);
         bottomView=  findViewById(R.id.bottom);
+        textFlickerView=  findViewById(R.id.text);
+        tvAddr=  findViewById(R.id.order_detail_address_tv);
         Drawable d= ContextCompat.getDrawable(this,R.drawable.ic_launcher);
         radioButton.setCompoundDrawablesWithIntrinsicBounds(null,d,null,null);
         radioButton.setText("TEST");
         editText=findViewById(R.id.ed);
+        imageView=findViewById(R.id.test_image);
+        imageView2=findViewById(R.id.test_image2);
+        tvAddr2=findViewById(R.id.order_detail_address_tv2);
+        tvAddr3=findViewById(R.id.order_detail_address_tv3);
         Thread thread=new Thread(new MyRunable(this));
         thread.start();
 
@@ -138,6 +182,43 @@ public  class MainActivity extends BaseActivity implements Observer {
         Messenger messenger=new Messenger(new Handler());
         Message message=new Message();
          toast=new NewToast();
+        TimePickerDialog dialog=new TimePickerDialog(this, R.style.common_time_dialog, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            }
+        }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                Calendar.getInstance().get(Calendar.MINUTE),
+                true);
+//        dialog.show();
+        textFlickerView.start();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ToastUtil.show(MainActivity.this,"tus",0);
+            }
+        },6000);
+
+//        tvAddr.setText("收货地址：" +ToDBC("北京市高和萃北京市朝阳区东三环北路甲26号楼博瑞大厦"));
+        String s="收货地址北京市高和萃北京市朝阳区东三环北路甲号楼博瑞大厦博瑞大厦博瑞大厦东三环北路甲号东三环北路甲号";
+        String s1="收货地址北京市高和萃北202";
+        tvAddr2.setText(s1);
+        tvAddr3.setText(s);
+        tvAddr2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        tvAddr2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+            }
+        });
+
+
 //        fingerprintManager=getSystemService(FingerprintManager.class);
 //        FingerUtil.init();
 //        Window window=getWindow();
@@ -158,6 +239,25 @@ public  class MainActivity extends BaseActivity implements Observer {
 //        layoutParams.type=WindowManager.LayoutParams.TYPE_TOAST;
 //        m.addView(tv2,layoutParams);
 
+        Glide.with(this).load(imgurl).transform(new Argb8888Transform(this)).into(imageView2);
+        Glide.with(this).load(imgurl).into(imageView);
+//        loadImage(this,imgurl,imageView2);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap= ImageUtil.getImageBitmap(imgurl);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        imageView.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        }).start();
+
+
+
+
 
 
 
@@ -167,10 +267,22 @@ public  class MainActivity extends BaseActivity implements Observer {
 //        Log.i("aaa","==========encrypt====>"+ NativeUtil.myEncrypt(""));
 //        Log.i("aaa","==========decrypt====>"+ NativeUtil.myDecrypt(""));
     }
+    public static String ToDBC(String input) {
+        char c[] = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == ' ') {
+                c[i] = '\u3000';
+            } else if (c[i] < '\177') {
+                c[i] = (char) (c[i] + 65248);
+
+            }
+        }
+        return new String(c);
+    }
     public  void fun(){
-        Log.i("aaa","=======getRootDirectory============>fun"+ Environment.getRootDirectory());
-        Log.i("aaa","=======getExternalStorageDirectory============>fun"+ Environment.getExternalStorageDirectory());
-        Log.i("aaa","=======getExternalFilesDir============>fun"+getExternalFilesDir("test/b/c/qwe"));
+        Log.i("aaa","=======getRootDirectory============>animationEnd"+ Environment.getRootDirectory());
+        Log.i("aaa","=======getExternalStorageDirectory============>animationEnd"+ Environment.getExternalStorageDirectory());
+        Log.i("aaa","=======getExternalFilesDir============>animationEnd"+getExternalFilesDir("test/b/c/qwe"));
     }
 
     @Override
@@ -207,11 +319,13 @@ public  class MainActivity extends BaseActivity implements Observer {
     @Override
     protected void onPause() {
         super.onPause();
+        LogUtil.i("=====onPause=====>");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        LogUtil.i("=====onStop=====>");
     }
 
     @Override
@@ -384,6 +498,98 @@ public  class MainActivity extends BaseActivity implements Observer {
 
 //                    startService(new Intent(parent.getContext(),AliveService.class));
                     break;
+                case 18:
+                    intent.setClass(parent.getContext(),DrawerLayoutActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 19:
+                    intent.setClass(parent.getContext(),AlarmManagerActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 20:
+                    intent.setClass(parent.getContext(),NotKillActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 21:
+                    intent.setClass(parent.getContext(),PopupWindownActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 22:
+                    intent.setClass(parent.getContext(),WorkManagerActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 23:
+                    intent.setClass(parent.getContext(),UmengActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 24:
+                    intent.setClass(parent.getContext(),TestActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 25:
+                    JobScheduler jobScheduler = (JobScheduler)getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                    intent.setClass(parent.getContext(),NewTaskActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 26:
+                    intent.setClass(parent.getContext(),WindowActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 27:
+                    intent.setClass(parent.getContext(),LooperActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 28:
+                    intent.setClass(parent.getContext(),ToggleButtonActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 29:
+                    intent.setClass(parent.getContext(),PlayAudioActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 30:
+                    intent.setClass(parent.getContext(),RecycleViewAnimActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 31:
+                    intent.setClass(parent.getContext(),ToImageActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
+                case 32:
+                    intent.setClass(parent.getContext(),ImagePickerActivity.class);
+
+
+//                    startService(new Intent(parent.getContext(),AliveService.class));
+                    break;
             }
             startActivityForResult(intent,0);
         });
@@ -437,6 +643,21 @@ public  class MainActivity extends BaseActivity implements Observer {
         adapter.add("自定义View2");
         adapter.add("自定义View3");
         adapter.add("自定义View4");
+        adapter.add("抽屉");
+        adapter.add("alarmManager");
+        adapter.add("notkillservice");
+        adapter.add("Popupwindow");
+        adapter.add("WorkManager");
+        adapter.add("友盟统计");
+        adapter.add("fragment   bug");
+        adapter.add("NEW TASK ACTIVITY");
+        adapter.add("window ACTIVITY");
+        adapter.add("轮询实现方式");
+        adapter.add("toggle");
+        adapter.add("播放提示音");
+        adapter.add("recyclerView 动画");
+        adapter.add("相册选择图片");
+        adapter.add("相册选择图片-自己写的");
         lv.setAdapter(adapter);
 
 
@@ -460,6 +681,7 @@ public  class MainActivity extends BaseActivity implements Observer {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+//        System.exit(0);
         LogUtil.e("=======onBackPressed========>");
     }
 
@@ -474,4 +696,39 @@ public  class MainActivity extends BaseActivity implements Observer {
         super.onAttachedToWindow();
         ToastUtil.showShort(this,"width========="+lv.getWidth()+"");
     }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+    }
+
+    public  void loadImage(Context context ,String url, final ImageView imageView){
+
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .crossFade()
+                .thumbnail( 0.1f )
+                .into(new GlideDrawableImageViewTarget(imageView) {
+                    @Override
+                    public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
+                        super.onResourceReady(drawable, anim);
+                        //在这里添加一些图片加载完成的操作
+                        imageView.setImageDrawable(drawable);
+                    }
+                });
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+//        super.onSaveInstanceState(outState, outPersistentState);
+        LogUtil.i("===onSaveInstanceState====>");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        LogUtil.i("===onRestoreInstanceState====>");
+    }
+
+
 }

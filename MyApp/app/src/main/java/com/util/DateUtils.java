@@ -13,7 +13,15 @@ import java.util.List;
 public class DateUtils {
     public static int   getNowMonth(){
         Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.MONTH)-1;
+        return cal.get(Calendar.MONTH)+1;
+    }
+    public static int   getNowYear(){
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.YEAR);
+    }
+    public static int   getNowDay(){
+        Calendar cal = Calendar.getInstance();
+        return cal.get(Calendar.DAY_OF_MONTH);
     }
     public static List<MyDate> getDateList(int year, int moth){
         List<MyDate>list=new ArrayList<>();
@@ -36,6 +44,7 @@ public class DateUtils {
         for (int i=firstDay;i<=lastDay;i++){
             MyDate date=new MyDate();
             date.day=""+i;
+            date.isNowDay=i==getNowDay();
             list.add(date);
         }
         return list;

@@ -6,5 +6,5 @@ package com.dawn.bean;
 
 public class MyDate {
     public String day;
-    public int type;
+    public boolean isNowDay;
 }

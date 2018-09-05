@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dawn.modules.ToggleButtonActivity">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+    <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textOff="textOff"
+        android:textOn="textOn"
+        android:visibility="gone"
+        android:textColor="#f00"
+        />
+    
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:textOn="拒绝"
+        android:switchMinWidth="90dp"
+        android:textOff="同意"
+        android:thumb="@drawable/green_thumb"
+        android:track="@drawable/gray_track"
+        android:textColor="#f00"
+        android:visibility="gone"
+        android:switchTextAppearance="@style/SwitchTheme"
+        android:layout_height="wrap_content" />
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:textOn="拒绝"
+        android:switchMinWidth="400dp"
+        android:textOff="同意"
+        android:visibility="visible"
+        android:layout_height="wrap_content" />
+    <com.view.SwitchButton
+        android:id="@+id/switch3"
+        android:background="#ff0"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+    <com.view.AnimView
+        android:layout_marginTop="40dp"
+        android:background="#ff0"
+        android:text="uewqiiosjadiosajdoshaudhsahiosoajdiosajd"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>

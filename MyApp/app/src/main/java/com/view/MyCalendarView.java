@@ -54,14 +54,14 @@ public class MyCalendarView extends LinearLayout{
         tv=view.findViewById(R.id.tvbelow);
         dateList=new ArrayList<>();
         dateList.clear();
-        dateList.addAll(DateUtils.getDateList(2017,DateUtils.getNowMonth()));
+        dateList.addAll(DateUtils.getDateList(DateUtils.getNowYear(),DateUtils.getNowMonth()));
         adapter=new MyAdapter(dateList);
         mGridView.setAdapter(adapter);
         addView(view);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                adapter.setSelecPos(position);
+                adapter.setSelectPos(position);
                 adapter.notifyDataSetChanged();
                 if(clickListener!=null){
                     clickListener.onItemClick(parent,view,position,id);

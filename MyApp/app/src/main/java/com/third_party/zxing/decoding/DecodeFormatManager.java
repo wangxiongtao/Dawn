@@ -85,18 +85,19 @@ final class DecodeFormatManager {
       }
     }
     if (decodeMode != null) {
-      if (Intents.Scan.PRODUCT_MODE.equals(decodeMode)) {
-        return PRODUCT_FORMATS;
-      }
-      if (Intents.Scan.QR_CODE_MODE.equals(decodeMode)) {
-        return QR_CODE_FORMATS;
-      }
-      if (Intents.Scan.DATA_MATRIX_MODE.equals(decodeMode)) {
-        return DATA_MATRIX_FORMATS;
-      }
-      if (Intents.Scan.ONE_D_MODE.equals(decodeMode)) {
-        return ONE_D_FORMATS;
-      }
+//      if (Intents.Scan.PRODUCT_MODE.equals(decodeMode)) {
+//        return PRODUCT_FORMATS;
+//      }
+//      if (Intents.Scan.QR_CODE_MODE.equals(decodeMode)) {
+//        return QR_CODE_FORMATS;
+//      }
+//      if (Intents.Scan.DATA_MATRIX_MODE.equals(decodeMode)) {
+//        return DATA_MATRIX_FORMATS;
+//      }
+//      if (Intents.Scan.ONE_D_MODE.equals(decodeMode)) {
+//        return ONE_D_FORMATS;
+//      }
+      return QR_CODE_FORMATS;
     }
     return null;
   }

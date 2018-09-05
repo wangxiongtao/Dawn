@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dawn">
+    package="com.dawn"
+    android:installLocation="internalOnly">
 
     <!--
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,6 +14,7 @@
     <!-- 获取机型信息权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
     <!-- 查看 Wi-Fi 状态 -->
@@ -37,6 +39,10 @@
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 摄像头权限 -->
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- <uses-permission android:name="ACTION_MANAGE_OVERLAY_PERMISSION"/> -->
     <!-- 自动聚焦权限 -->
     <application
         android:name=".MyApp"
@@ -46,8 +52,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b062d48a40fa30e3f00005c" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="null" />
+
         <activity
             android:name=".modules.MainActivity"
+            android:launchMode="singleTask"
             android:opacity="transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -119,7 +133,56 @@
         <activity android:name=".modules.ShowErrorActivity" />
         <activity android:name=".modules.MyViewActivity2" />
         <activity android:name=".modules.MyView3Activity" />
-        <activity android:name=".modules.MyView4Activity"></activity>
+        <activity android:name=".modules.MyView4Activity" />
+
+        <!-- <meta-data -->
+        <!-- android:name="com.third_party.GlideConfiguration" -->
+        <!-- android:value="GlideModule"/> -->
+        <activity android:name=".modules.DrawerLayoutActivity" />
+        <activity android:name=".modules.PickViewActivity" />
+        <activity android:name=".modules.workmanager.WorkManagerActivity" />
+        <activity android:name=".modules.alarm.AlarmManagerActivity" />
+
+        <service android:name=".modules.alarm.LongRunningService" />
+
+        <receiver android:name=".modules.alarm.AlarmReceiver" />
+
+        <service
+            android:name=".modules.notkillservice.FrontService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".modules.notkillservice.NotKillActivity" />
+        <activity android:name=".modules.PopupWindownActivity" />
+        <activity android:name=".modules.UmengActivity" />
+        <activity android:name=".modules.fragmenttest.TestActivity" />
+        <activity
+            android:name=".modules.NewTaskActivity"
+            android:taskAffinity="com.NewTaskActivity" />
+
+        <service
+            android:name=".modules.DialogService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".modules.WindowActivity" />
+        <activity android:name=".modules.LooperActivity" />
+
+        <receiver
+            android:name=".modules.receiver.MyReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:priority="1000">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".modules.ToggleButtonActivity" />
+        <activity android:name=".modules.PlayAudioActivity" />
+        <activity android:name=".modules.RecycleViewAnimActivity" />
+        <activity android:name="com.view.ToImageActivity" />
+        <activity android:name="com.view.ImagePicker.ImagePickerActivity"></activity>
     </application>
 
 </manifest>

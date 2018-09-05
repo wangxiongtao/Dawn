@@ -4,10 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#161515"
+    android:orientation="vertical"
     tools:context="com.dawn.modules.MyView4Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:visibility="gone">
+
+        <com.view.growthvalue.WaveView
+            android:id="@+id/wave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.view.growthvalue.GrowthValueView
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+
+    </RelativeLayout>
+
+    <com.view.growthvalue.MyLayout
+        android:background="#f00"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:visibility="visible" />
+
+   <com.view.sign.SignButton
+       android:layout_margin="50dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/value_bg"
+        android:text="10"
+        android:textSize="8sp" />
+
+
     <com.view.MyArcView
         android:id="@+id/arc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+    <!--<com.view.growthvalue.GrowthValueView-->
+    <!--android:background="#f60"-->
+    <!--android:layout_margin="30dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="30dp"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="30dp"
+        android:background="#f60" />
 
 </LinearLayout>

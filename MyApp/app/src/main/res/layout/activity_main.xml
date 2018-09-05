@@ -2,9 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff">
+<LinearLayout
+    android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="#fff"
+    android:visibility="gone"
     android:layout_height="match_parent">
+
+    <com.view.TextFlickerView
+        android:id="@+id/text"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:text="全时便利"
+        android:textSize="30sp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:background="#f00"
+        android:id="@+id/order_detail_address_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#333333"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp" />
+    <TextView
+        android:background="#f00"
+        android:id="@+id/order_detail_address_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#333333"
+        android:text="收货地址北京市高和萃北京市朝阳区东三环北路甲号楼博瑞大厦博瑞大厦博瑞大厦东三环北路甲号东三环北路甲号"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp" />
+    <com.view.NameTextView
+        android:background="#f00"
+        android:id="@+id/order_detail_address_tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#333333"
+        android:text="收货地址北京市高26和萃北京市朝阳区东三环北路26甲号楼博瑞大厦博瑞大厦博瑞大厦"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp" />
+    <com.view.AutoSplitTextView
+        android:background="#f00"
+        android:id="@+id/order_detail_address_tv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#333333"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textSize="14sp" />
+
+
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_gravity="center_vertical"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_height="300dp">
+        <ImageView
+            android:layout_marginTop="80dp"
+            android:id="@+id/test_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/test_image2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
     <LinearLayout
         android:layout_marginTop="50dp"
         android:orientation="horizontal"
@@ -12,8 +99,11 @@
         android:background="@drawable/yiny"
         android:layout_height="50dp">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:text="2222222222wqewqeqw"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/ed"
@@ -21,7 +111,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:singleLine="true"
-        android:text=""/>
+        android:text="11111111111111111111111"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
