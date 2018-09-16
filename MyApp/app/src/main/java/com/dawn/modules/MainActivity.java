@@ -147,6 +147,7 @@ public  class MainActivity extends BaseActivity implements Observer {
 //        mToolbar_Title_Txt.setText("测试");
         lv= (ListView) findViewById(R.id.lv);
         radioButton=  findViewById(R.id.rbtn);
+        
         bottomView=  findViewById(R.id.bottom);
         textFlickerView=  findViewById(R.id.text);
         tvAddr=  findViewById(R.id.order_detail_address_tv);
